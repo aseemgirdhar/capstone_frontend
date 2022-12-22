@@ -1,0 +1,14 @@
+.ChipWrapper{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+    span{
+        color: #aaa;
+        border: solid 1px #ddd;
+        padding: 0 15px;
+        border-radius: 20px;
+        cursor: pointer;
+    }
+}

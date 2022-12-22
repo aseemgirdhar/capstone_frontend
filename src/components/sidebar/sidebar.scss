@@ -1,0 +1,19 @@
+.sidebar-avatar{
+    display: flex;
+    align-items: center;
+    float: left;
+    justify-content: flex-start;
+    width: 100%;
+    padding-left: 15px;
+    gap: 10px;
+}
+.logo{
+    max-width: 200px;
+}
+.active{
+    background: #d81816 !important;
+    color: #fff !important;
+    svg {
+        fill: white;
+     }
+}

@@ -1,0 +1,37 @@
+@import "../../theme/color";
+.static-card-wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .card{
+        min-width: calc(25% - 10px);
+        .card-content{
+            display: flex;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+        
+        &:nth-of-type(1) {
+            background: $light-blue;
+        }
+        &:nth-of-type(2) {
+            background: $light-sky;
+        }
+        &:nth-of-type(3) {
+            background: $light-yellow;
+        }
+        &:nth-of-type(4) {
+            background: $light-orange;
+        }
+
+        h3{
+            font-size: 3rem;
+            margin: 0;
+        }
+        h6{
+            margin: 0;
+            font-size: 1.25rem;
+        }
+    }
+}
