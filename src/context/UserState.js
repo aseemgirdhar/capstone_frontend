@@ -10,6 +10,8 @@ const UserState = ({ children }) => {
     userdetails: ''
 
   })
+  const studentId = "";
+
   const loginHandler = (data) => {
     setManage((prev) => (
       {
@@ -23,7 +25,7 @@ const UserState = ({ children }) => {
   };
   return (
     <User.Provider value={{
-      loginHandler, manage, setManage
+      loginHandler, manage, setManage , studentId
     }}>
         {children}
     </User.Provider>

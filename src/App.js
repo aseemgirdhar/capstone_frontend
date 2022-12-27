@@ -36,7 +36,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Login />} />
 
-            {(!manage.isLoggedIn || manage.isLoggedIn==="")  &&   <Route path="*" element={<NotFound />} /> }
+            {/* {(!manage.isLoggedIn || manage.isLoggedIn==="")  &&   <Route path="*" element={<NotFound />} /> } */}
 
             {data === "dashboard" && manage.isLoggedIn && <Route path="/dashboard" element={<Dashboard />} />}  
             {data === "students" && manage.isLoggedIn  &&  <Route path="/students" element={<Students />} /> }

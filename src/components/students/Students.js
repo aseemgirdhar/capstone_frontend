@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -18,7 +18,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-import './student.scss'
+import "./student.scss";
+import UserContext from "../../context/UserContext";
+
 const theme = createTheme();
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -51,7 +53,9 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 const Students = () => {
   const [value, setValue] = React.useState(null);
-
+  const ctx = useContext(UserContext);
+  const usrType = ctx.manage.userdetails.userType;
+  // console.log(ctx.manage.userdetails.userType)
   const [getBatch, setgetBatch] = useState([]);
   const [getStudent, setGetStudent] = useState([]);
   const [getBatchDetails, setgetBatchDetails] = useState("All");
@@ -70,7 +74,6 @@ const Students = () => {
       });
   };
 
-
   // const callapi = () => {
   //   const batchList = getAllBatch();
   //   const allStudentList = getAllStudent();
@@ -84,13 +87,22 @@ const Students = () => {
       .catch((err) => {
         console.log(err);
       });
-      getAllStudent()
+    getAllStudent()
       .then((res) => res.data)
       .then((allStudent) => setAllStudent(allStudent))
       .catch((err) => {
         console.log(err);
       });
   }, []);
+  
+  const showAttendance = (id) => {
+    if (usrType === "faculty") {
+      navigate(`/student/${id}`);
+    } else {
+      ctx.studentId = id;
+      navigate(`/profile`);
+    }
+  };
 
   return (
     <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
@@ -154,7 +166,6 @@ const Students = () => {
                   </Select>
                 </FormControl>
 
-
                 {/* {getBatch && getBatch.map((item) => <div>{item}</div>)} */}
               </Box>
             </Box>
@@ -180,16 +191,17 @@ const Students = () => {
                 <StyledTableCell>Batch Name</StyledTableCell>
                 <StyledTableCell align="left">Email</StyledTableCell>
                 <StyledTableCell align="left">Full Name</StyledTableCell>
-              
               </TableRow>
             )}
           </TableHead>
           <TableBody>
             {filterStudent &&
               getStudent.map((student) => (
-               
-                <StyledTableRow className="cursor-pointer" key={student._id} onClick={() => navigate(`/student/${student._id}`)}>
-                   
+                <StyledTableRow
+                  className="cursor-pointer"
+                  key={student._id}
+                  onClick={() => showAttendance(student._id)}
+                >
                   <StyledTableCell component="th" scope="row">
                     {student.batchName}
                   </StyledTableCell>
@@ -199,17 +211,18 @@ const Students = () => {
                   <StyledTableCell align="left">
                     {student.fullname}
                   </StyledTableCell>
-                 
                 </StyledTableRow>
-               
               ))}
 
             {getBatchDetails === "All" &&
               allStudent.map((student) => (
-
-                <StyledTableRow  className="cursor-pointer" key={student._id} onClick={() => navigate(`/student/${student._id}`)}>
+                <StyledTableRow
+                  className="cursor-pointer"
+                  key={student._id}
+                  onClick={() => showAttendance(student._id)}
+                >
                   <StyledTableCell component="th" scope="row">
-                    {" "}
+                  
                     {student.courseName}
                   </StyledTableCell>
                   <StyledTableCell align="left">
@@ -228,7 +241,6 @@ const Students = () => {
                     {format(new Date(student.accountCreated), "d-M-Y")}
                   </StyledTableCell>
                 </StyledTableRow>
-            
               ))}
           </TableBody>
         </Table>

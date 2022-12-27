@@ -1,6 +1,6 @@
 // import React from "react";
 import axios from "axios";
-const baseUrl = "http://65.2.166.0";
+const baseUrl = "http://localhost:3000";
 const token = sessionStorage.getItem("token");
 export const RegisterUser = async (params, type) => {
  return await axios
