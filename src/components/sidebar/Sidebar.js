@@ -33,6 +33,7 @@ import Logo from "../../assets/images/logo.png"
 import Tooltip from '@mui/material/Tooltip';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import { useCookies } from "react-cookie";
 
 const drawerWidth = 240;
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
@@ -110,7 +111,8 @@ const Sidebar = ({ getData }) => {
   const [modelType, setModelType] = useState("");
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  const [cookies, setCookie , removeToken] = useCookies(["access_token" , "refresh_token"]);
+  
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -157,6 +159,13 @@ const Sidebar = ({ getData }) => {
     // data = type;
   };
   const logOut = () => {
+    
+    removeToken("access_token");
+    removeToken("refresh_token");
+    removeToken("userId");
+    removeToken("userLogged");
+    removeToken("userType");
+    removeToken("studentId");
     ctx.loginHandler({
       isLoggedIn: false,
     });
@@ -189,7 +198,7 @@ const Sidebar = ({ getData }) => {
           </Box>
           <Box>
             <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <IconButton onClick={handleOpenUserMenu}>
                 <Avatar alt="Remy Sharp" src="https://placeimg.com/640/480/any" />
               </IconButton>
             </Tooltip>
@@ -264,7 +273,7 @@ const Sidebar = ({ getData }) => {
               </ListItemText>
             </ListItemButton>
             <Divider />
-            {ctx.manage.userdetails.userType === "admin" && (
+            {cookies === "admin" && (
               <>
                 <ListItemButton onClick={() => menuHandeler("faculty")}>
                   <ListItemIcon>
@@ -278,7 +287,7 @@ const Sidebar = ({ getData }) => {
                 <Divider />
               </>
             )}
-            {ctx.manage.userdetails.userType === "admin" && (
+            {cookies === "admin" && (
               <>
                 <ListItemButton onClick={() => menuHandeler("careerServices")}>
                   <ListItemIcon>
@@ -292,7 +301,7 @@ const Sidebar = ({ getData }) => {
                 <Divider />
               </>
             )}
-            {ctx.manage.userdetails.userType === "admin" && (
+            {cookies === "admin" && (
               <>
                 <ListItemButton onClick={RegisterUser}>
                   <ListItemIcon>
@@ -308,7 +317,7 @@ const Sidebar = ({ getData }) => {
               </>
             )}
 
-            {ctx.manage.userdetails.userType === "faculty" && (
+            {cookies === "faculty" && (
               <>
                 <ListItemButton onClick={uploadQuestion}>
                   <ListItemIcon>
@@ -322,7 +331,7 @@ const Sidebar = ({ getData }) => {
                 <Divider />
               </>
             )}
-            {ctx.manage.userdetails.userType === "faculty" && (
+            {cookies === "faculty" && (
               <>
                 <ListItemButton onClick={() => menuHandeler("attendance")}>
                   <ListItemIcon>
@@ -336,7 +345,7 @@ const Sidebar = ({ getData }) => {
                 <Divider />
               </>
             )}
-            {ctx.manage.userdetails.userType === "faculty" && (
+            {cookies === "faculty" && (
               <>
                 <ListItemButton onClick={createBatch}>
                   <ListItemIcon>

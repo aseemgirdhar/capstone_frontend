@@ -13,11 +13,13 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
+import { useCookies } from "react-cookie";
 
 import "./Profile.scss";
 import { Button } from "@mui/material";
 const Profile = () => {
   const [getStudent, setGetStudent] = useState([]);
+  const [cookies, setCookie ] = useCookies();
 
   const ctx = useContext(UserContext);
   const userId = ctx.studentId;
@@ -38,7 +40,7 @@ const Profile = () => {
     color: theme.palette.text.secondary,
   }));
   useEffect(() => {
-    getSingleStudent(`${userId}`)
+    getSingleStudent(`${cookies.studentId}`)
       .then((res) => res.data)
       .then((getStudent) => setGetStudent(getStudent))
       .catch((err) => {

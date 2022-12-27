@@ -3,16 +3,19 @@ import ReactDOM from 'react-dom/client';
 import './index.scss';
 import App from './App';
 import UserState from "./context/UserState";
+import { CookiesProvider } from "react-cookie";
 
 import { BrowserRouter } from 'react-router-dom';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 root.render(
+  <CookiesProvider>
   <UserState>
     <BrowserRouter>
       <App />
     </BrowserRouter>
   </UserState>
+  </CookiesProvider>
  
 );
 

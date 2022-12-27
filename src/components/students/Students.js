@@ -20,6 +20,7 @@ import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
 import "./student.scss";
 import UserContext from "../../context/UserContext";
+import { useCookies } from "react-cookie";
 
 const theme = createTheme();
 
@@ -53,6 +54,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 const Students = () => {
   const [value, setValue] = React.useState(null);
+  const [cookies, setCookie] = useCookies();
+
   const ctx = useContext(UserContext);
   const usrType = ctx.manage.userdetails.userType;
   // console.log(ctx.manage.userdetails.userType)
@@ -99,7 +102,9 @@ const Students = () => {
     if (usrType === "faculty") {
       navigate(`/student/${id}`);
     } else {
-      ctx.studentId = id;
+      setCookie("studentId", id);
+
+      // ctx.studentId = id;
       navigate(`/profile`);
     }
   };
