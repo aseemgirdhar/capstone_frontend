@@ -2,11 +2,9 @@
 import axios from "axios";
 const baseUrl = "http://65.2.166.0";
 const token = sessionStorage.getItem("token");
-export const RegisterUser = (params, type) => {
-  axios
+export const RegisterUser = async (params, type) => {
+ return await axios
     .post(`${baseUrl}/${type}/register`, params)
-    .then((res) => console.log(res))
-    .catch((err) => console.error(err));
 };
 
 export const getAllStudent =  () => {
@@ -14,6 +12,11 @@ export const getAllStudent =  () => {
     .get(`${baseUrl}/student/getstudent`, {
       headers: { Authorization: `${token}` },
     })
+};
+
+export const getSingleStudent =  (id) => {
+  return axios
+    .get(`${baseUrl}/student/${id}`,)
 };
 
 export const LoginUser = (data, type) => {
@@ -40,6 +43,11 @@ export const getAllBatch = () => {
 export const createNewBatch = (params) => {
   return axios
     .post(`${baseUrl}/batch/register`, params);
+};
+
+export const markAttendance = (params) => {
+  return axios
+    .post(`${baseUrl}/attendance/register`, params);
 };
 
 

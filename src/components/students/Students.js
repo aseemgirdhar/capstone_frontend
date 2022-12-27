@@ -17,15 +17,8 @@ import InputLabel from "@mui/material/InputLabel";
 import CssBaseline from "@mui/material/CssBaseline";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { format } from "date-fns";
-
-import TextField from "@mui/material/TextField";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Radio from "@mui/material/Radio";
-import RadioGroup from "@mui/material/RadioGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormLabel from "@mui/material/FormLabel";
+import { useNavigate } from "react-router-dom";
+import './student.scss'
 const theme = createTheme();
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -64,7 +57,7 @@ const Students = () => {
   const [getBatchDetails, setgetBatchDetails] = useState("All");
   const [allStudent, setAllStudent] = useState([]);
   const [filterStudent, setFilterStudent] = useState(false);
-
+  const navigate = useNavigate();
   const changeHandeler = (e) => {
     setgetBatchDetails(e.target.value);
     setFilterStudent(true);
@@ -77,17 +70,21 @@ const Students = () => {
       });
   };
 
-  const batchList = getAllBatch();
-  const allStudentList = getAllStudent();
 
+  // const callapi = () => {
+  //   const batchList = getAllBatch();
+  //   const allStudentList = getAllStudent();
+  // }
   useEffect(() => {
-    batchList
+    // const batchList = getAllBatch();
+    // const allStudentList = getAllStudent();
+    getAllBatch()
       .then((res) => res.data)
       .then((getBatch) => setgetBatch(getBatch))
       .catch((err) => {
         console.log(err);
       });
-    allStudentList
+      getAllStudent()
       .then((res) => res.data)
       .then((allStudent) => setAllStudent(allStudent))
       .catch((err) => {
@@ -156,18 +153,7 @@ const Students = () => {
                     {/*  */}
                   </Select>
                 </FormControl>
-                <div style={{ minwidth: 50 + "%" }}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DatePicker
-                      label="Select Date"
-                      value={value}
-                      onChange={(newValue) => {
-                        setValue(newValue);
-                      }}
-                      renderInput={(params) => <TextField {...params} />}
-                    />
-                  </LocalizationProvider>
-                </div>
+
 
                 {/* {getBatch && getBatch.map((item) => <div>{item}</div>)} */}
               </Box>
@@ -194,16 +180,16 @@ const Students = () => {
                 <StyledTableCell>Batch Name</StyledTableCell>
                 <StyledTableCell align="left">Email</StyledTableCell>
                 <StyledTableCell align="left">Full Name</StyledTableCell>
-                <StyledTableCell align="left">
-                  Attendance Status
-                </StyledTableCell>
+              
               </TableRow>
             )}
           </TableHead>
           <TableBody>
             {filterStudent &&
               getStudent.map((student) => (
-                <StyledTableRow key={student._id}>
+               
+                <StyledTableRow className="cursor-pointer" key={student._id} onClick={() => navigate(`/student/${student._id}`)}>
+                   
                   <StyledTableCell component="th" scope="row">
                     {student.batchName}
                   </StyledTableCell>
@@ -213,36 +199,15 @@ const Students = () => {
                   <StyledTableCell align="left">
                     {student.fullname}
                   </StyledTableCell>
-
-                  <StyledTableCell align="left">
-                    <FormControl>
-                     
-                      <RadioGroup
-                      row
-                        aria-labelledby="demo-radio-buttons-group-label"
-                        defaultValue="Present"
-                        name="radio-buttons-group"
-                      >
-                        
-                        <FormControlLabel
-                          value="Present"
-                          control={<Radio />}
-                          label="Present"
-                        />
-                        <FormControlLabel
-                          value="Absent"
-                          control={<Radio />}
-                          label="Absent"
-                        />
-                      </RadioGroup>
-                    </FormControl>
-                  </StyledTableCell>
+                 
                 </StyledTableRow>
+               
               ))}
 
             {getBatchDetails === "All" &&
               allStudent.map((student) => (
-                <StyledTableRow key={student._id}>
+
+                <StyledTableRow  className="cursor-pointer" key={student._id} onClick={() => navigate(`/student/${student._id}`)}>
                   <StyledTableCell component="th" scope="row">
                     {" "}
                     {student.courseName}
@@ -263,6 +228,7 @@ const Students = () => {
                     {format(new Date(student.accountCreated), "d-M-Y")}
                   </StyledTableCell>
                 </StyledTableRow>
+            
               ))}
           </TableBody>
         </Table>

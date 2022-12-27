@@ -18,7 +18,6 @@ import { getAllBatch } from "../../api/Api";
 const theme = createTheme();
 const Signup = () => {
   const [getBatch, setgetBatch] = useState([]);
-  // const [getBatchDetails, setgetBatchDetails] = useState(" ");
   const [fullname, setfullname] = useState("");
   const [username, setUsername] = useState("");
   const [phone, setphone] = useState("");
@@ -28,7 +27,7 @@ const Signup = () => {
   const [batchName, setbatchName] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const batchList = getAllBatch();
-
+  
   let data = {
     batchName: batchName,
     fullname: fullname,
@@ -58,13 +57,18 @@ const Signup = () => {
   const changeHandeler = (e) => {
     setbatchName(e.target.value);
   };
+  
   const handleSubmit = (event) => {
     event.preventDefault();
+    const registerUser =  RegisterUser(data, type)
     if (password.length < 8) {
       console.log(password.length, password);
       setErrorMessage("Password should be at least 8 characters");
     } else {
-      RegisterUser(data, type);
+      registerUser.then((res) => res ,  event.target.reset())
+      .catch((err) => console.error(err));
+      setbatchName( event.target.reset());
+      settype(event.target.reset())
     }
   };
   useEffect(() => {

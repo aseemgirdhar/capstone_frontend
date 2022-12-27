@@ -28,9 +28,9 @@ const CreateBatch = () => {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    createNewBatch(data).then((res) => console.log(res))
+    createNewBatch(data).then((res) => console.log(res) , e.target.reset())
     .catch((err) => console.error(err));
-
+    // e.target.reset()
   }
   return (
     <div>

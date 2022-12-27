@@ -187,7 +187,7 @@ const Sidebar = ({ getData }) => {
               
             </Button>
           </Box>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
                 <Avatar alt="Remy Sharp" src="https://placeimg.com/640/480/any" />
@@ -210,7 +210,7 @@ const Sidebar = ({ getData }) => {
               onClose={handleCloseUserMenu}
             >
               
-                <MenuItem>
+                <MenuItem onClick={() => navigate("/profile")}>
                   <Typography textAlign="center">Profile</Typography>
                 </MenuItem>
                 <MenuItem onClick={logOut}>

@@ -11,6 +11,9 @@ import Faculty from "./components/faculty/Faculty";
 import CareerService from "./components/careerService/CareerService";
 import UserContext from "./context/UserContext"
 import NotFound from "./components/notFound/NotFound";
+import Attendance from "./components/attendance/Attendance";
+import StudentDetail from "./components/studentDetails/StudentDetail";
+import Profile from "./components/profile/Profile";
 
 
 function App() {
@@ -39,7 +42,9 @@ function App() {
             {data === "students" && manage.isLoggedIn  &&  <Route path="/students" element={<Students />} /> }
             {data === "faculty" && manage.isLoggedIn  &&   <Route path="/faculty" element={<Faculty />} /> }
             {data === "careerServices" && manage.isLoggedIn  &&   <Route path="/careerServices" element={<CareerService />} /> }
-           
+            {data === "attendance" && manage.isLoggedIn  &&   <Route path="/attendance" element={<Attendance />} /> }
+            {manage.isLoggedIn  &&  <Route path="/student/:id"  element={<StudentDetail />}  />}
+            {manage.isLoggedIn  &&  <Route path="/profile" element={<Profile />} />}
           </Routes>
         </Box>
       </div>

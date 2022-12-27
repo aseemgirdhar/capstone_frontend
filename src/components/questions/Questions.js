@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -27,6 +25,11 @@ const Questions = () => {
   const [level, setLevel] = useState("");
   const [solution, setSolution] = useState("");
   const [skillTags , setSkillTags] =  useState(["Html" , "Css" , "Bootstrap"]);
+  const [msg, setMsg] = useState({
+    isSuccess: false,
+    isError: false
+  })
+
   const [isError, setIsError] = useState("")
   const [Err, setErr] = useState(false)
   let data = {
@@ -48,14 +51,14 @@ const Questions = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const uploadQue = QuestionUpload(data);
-    await uploadQue.then((res) => console.log(res))
+    await uploadQue.then((res) => console.log(res) , event.target.reset())
     .catch((err) => 
     {
         setErr(true)
         setIsError(err.response.data.message)
     })
     // console.log(">>>" , err.response.data.message));
-    
+    setSkill(event.target.reset())
   };
   const handleClick = (e) => {
     const tag = e.target.innerText;

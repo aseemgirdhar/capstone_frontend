@@ -1,0 +1,27 @@
+
+@import "../../theme/color";
+
+.userDetails-wrapper{
+    display: flex;
+    gap: 15px;
+    .user-img{
+        img{
+            max-width: 245px;
+            border-radius: 10px;
+        }
+    }
+    .userDetails{
+        display: flex;
+        flex-direction: column;
+        .student-name {
+            color: $red;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .student-batch , .student-contact{
+            font-size: 16px;
+            color: $dark-grey;
+            margin-bottom: 10px;
+        }
+    }
+}

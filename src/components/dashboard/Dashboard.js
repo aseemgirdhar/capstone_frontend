@@ -24,18 +24,16 @@ const Dashboard = () => {
   const [getBatch, setgetBatch] = useState([]);
   const [allStudent, setAllStudent] = useState([]);
 
-  const batchList = getAllBatch();
-  const allStudentList = getAllStudent();
-  
+ 
   useEffect(() => {
-    batchList
+    getAllBatch()
     .then((res) => res.data)
     .then((getBatch) => setgetBatch(getBatch.length))
     .catch((err) => {
       console.log(err);
     });
 
-    allStudentList
+    getAllStudent()
     .then((res) => res.data)
     .then((allStudent) => setAllStudent(allStudent.length))
     .catch((err) => {
