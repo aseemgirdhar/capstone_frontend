@@ -12,7 +12,6 @@ import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import Typography from "@mui/material/Typography";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
@@ -50,7 +49,7 @@ const StudentDetail = () => {
   };
   const submitAttendance = () => {
     const attData = {
-      indexNo: getStudent.indexNo,
+      student: getStudent._id,
       StudentName: getStudent.fullname,
       BatchName: getStudent.batchName,
       attendanceDate: value,

@@ -57,7 +57,7 @@ const Students = () => {
   const [cookies, setCookie] = useCookies();
 
   const ctx = useContext(UserContext);
-  const usrType = ctx.manage.userdetails.userType;
+  const usrType = cookies.userType;
   // console.log(ctx.manage.userdetails.userType)
   const [getBatch, setgetBatch] = useState([]);
   const [getStudent, setGetStudent] = useState([]);
@@ -76,14 +76,7 @@ const Students = () => {
         console.log(err);
       });
   };
-
-  // const callapi = () => {
-  //   const batchList = getAllBatch();
-  //   const allStudentList = getAllStudent();
-  // }
   useEffect(() => {
-    // const batchList = getAllBatch();
-    // const allStudentList = getAllStudent();
     getAllBatch()
       .then((res) => res.data)
       .then((getBatch) => setgetBatch(getBatch))
@@ -103,8 +96,6 @@ const Students = () => {
       navigate(`/student/${id}`);
     } else {
       setCookie("studentId", id);
-
-      // ctx.studentId = id;
       navigate(`/profile`);
     }
   };

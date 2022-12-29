@@ -36,7 +36,7 @@ function App() {
       <div className="App">
       <Box sx={{ display: 'flex' }}>
             <CssBaseline />
-      {cookies.userLogged &&  <Sidebar getData={getData} />}
+      {(manage.isLoggedIn || cookies.userLogged) &&  <Sidebar getData={getData} />}
       
           <Routes>
             <Route path="/" element={<Login />} />

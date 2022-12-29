@@ -111,18 +111,14 @@ const Sidebar = ({ getData }) => {
   const [modelType, setModelType] = useState("");
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const [cookies, setCookie , removeToken] = useCookies(["access_token" , "refresh_token"]);
-  
-  const handleOpenNavMenu = (event) => {
-    setAnchorElNav(event.currentTarget);
-  };
+  const [cookies, setCookie , removeToken] = useCookies();
+  console.log(cookies.userType)
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
+ 
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
@@ -273,7 +269,7 @@ const Sidebar = ({ getData }) => {
               </ListItemText>
             </ListItemButton>
             <Divider />
-            {cookies === "admin" && (
+            {cookies.userType === "admin" && (
               <>
                 <ListItemButton onClick={() => menuHandeler("faculty")}>
                   <ListItemIcon>
@@ -287,7 +283,7 @@ const Sidebar = ({ getData }) => {
                 <Divider />
               </>
             )}
-            {cookies === "admin" && (
+            {cookies.userType === "admin" && (
               <>
                 <ListItemButton onClick={() => menuHandeler("careerServices")}>
                   <ListItemIcon>
@@ -301,7 +297,7 @@ const Sidebar = ({ getData }) => {
                 <Divider />
               </>
             )}
-            {cookies === "admin" && (
+            {cookies.userType === "admin" && (
               <>
                 <ListItemButton onClick={RegisterUser}>
                   <ListItemIcon>
@@ -317,7 +313,7 @@ const Sidebar = ({ getData }) => {
               </>
             )}
 
-            {cookies === "faculty" && (
+            {cookies.userType === "faculty" && (
               <>
                 <ListItemButton onClick={uploadQuestion}>
                   <ListItemIcon>
@@ -331,7 +327,7 @@ const Sidebar = ({ getData }) => {
                 <Divider />
               </>
             )}
-            {cookies === "faculty" && (
+            {cookies.userType === "faculty" && (
               <>
                 <ListItemButton onClick={() => menuHandeler("attendance")}>
                   <ListItemIcon>
@@ -345,7 +341,7 @@ const Sidebar = ({ getData }) => {
                 <Divider />
               </>
             )}
-            {cookies === "faculty" && (
+            {cookies.userType === "faculty" && (
               <>
                 <ListItemButton onClick={createBatch}>
                   <ListItemIcon>
